@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitReturns": true,
+        "noUnusedLocals": false,
+        "outDir": "dist",
+        "sourceMap": true,
+        "strict": true,
+        "resolveJsonModule": true /* Enable importing .json files */,
+        "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */,
+        "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+        "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+        "target": "es2017",
+        "typeRoots": ["node_modules/@types", "src/typings"]
+    },
+    "compileOnSave": true,
+    "include": ["src"],
+    "exclude": ["node_modules"]
+}

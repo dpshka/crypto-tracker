@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../config";
 import { transformResponse } from "../helpers";
-import { IAsset } from "../models/coin.model";
+import { IAsset, IExchangeRate } from "../models/coin.model";
 
 const coinApiUrl = "https://rest.coinapi.io";
 const coinApiIconUrl = "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512";
@@ -29,4 +29,13 @@ async function getAssets(bookmarks?: string[]) {
     return assets;
 }
 
-export default { getAssets };
+async function getExchangeRates(assetId: string) {
+    const { data } = await axios.get<{ asset_id_base: string; rates: IExchangeRate[] }>(
+        `${coinApiUrl}/v1/exchangerate/${assetId}`,
+        { headers, transformResponse },
+    );
+
+    return data.rates;
+}
+
+export default { getAssets, getExchangeRates };

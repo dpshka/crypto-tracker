@@ -18,4 +18,10 @@ interface IAsset {
     icon?: string;
 }
 
-export { IAsset };
+interface IExchangeRate {
+    time: Date;
+    asset_id_quote: string;
+    rate: number;
+}
+
+export { IAsset, IExchangeRate };

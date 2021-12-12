@@ -7,12 +7,17 @@ const router = Router();
 router.get("/assets", async (req, res) => {
     try {
         const assets = await service.getAssets();
-        const filtered = assets
-            .filter((asset) => asset.type_is_crypto)
-            .sort((a, b) => b.volume_1mth_usd - a.volume_1mth_usd)
-            .slice(0, 100);
 
-        res.json(filtered);
+        if (assets.length > 0) {
+            const filtered = assets
+                .filter((asset) => asset.type_is_crypto)
+                .sort((a, b) => b.volume_1mth_usd - a.volume_1mth_usd)
+                .slice(0, 100);
+
+            res.json(filtered);
+        } else {
+            res.sendStatus(404);
+        }
     } catch (err) {
         if (axios.isAxiosError(err)) {
             const status = err.response?.status;

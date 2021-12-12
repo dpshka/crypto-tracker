@@ -9,7 +9,7 @@ import logger from "morgan";
 import cors from "cors";
 
 import { initializeApp, credential } from "firebase-admin";
-import functions from "firebase-functions";
+import * as functions from "firebase-functions";
 
 // Initialize Firebase.
 if (config.env === "production") {

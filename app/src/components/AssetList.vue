@@ -20,7 +20,7 @@ onMounted(async () => {
 
 <template>
     <div class="grid md:grid-cols-2 gap-4">
-        <Asset v-for="asset in assets" :key="asset.asset_id" :asset="asset" />
+        <Asset v-for="asset in assets" :key="asset.id" :asset="asset" />
     </div>
 </template>
 

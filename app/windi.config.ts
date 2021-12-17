@@ -17,9 +17,6 @@ export default defineConfig({
             gray: colors.gray,
             green: colors.green,
             white: colors.white,
-            // transparent: "transparent",
-            // light: "#fafafa",
-            // lighter: "rgba(0, 0, 0, 0.03)",
         },
     },
 });

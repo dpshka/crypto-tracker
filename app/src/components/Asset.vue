@@ -4,6 +4,7 @@ import { IAsset } from "../models/coin.model";
 
 const props = defineProps<{ asset: IAsset }>();
 const quote = props.asset.quote["USD"];
+
 const toReadableNumber = (num: number) => {
     return num.toLocaleString("en-us", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 };
@@ -45,7 +46,9 @@ const changeColor = computed(() => {
             Circulating supply: <span>{{ toReadableNumber(asset.circulating_supply) }} {{ asset.symbol }}</span>
         </div>
 
-        <div class="asset-details italic">Last updated: {{ new Date(asset.last_updated).toLocaleString() }}</div>
+        <div class="asset-details italic text-right">
+            Last updated: {{ new Date(asset.last_updated).toLocaleString() }}
+        </div>
     </div>
 </template>
 
@@ -77,6 +80,6 @@ const changeColor = computed(() => {
 }
 
 .asset-details > span {
-    @apply font-semibold;
+    @apply font-semibold text-gray-900;
 }
 </style>

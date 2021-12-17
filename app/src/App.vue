@@ -6,7 +6,7 @@ import AssetList from "./components/AssetList.vue";
 
 <template>
     <div class="max-w-4xl mx-auto py-8 px-4">
-        <div class="text-center font-bold text-4xl mb-8">Crypto Tracker</div>
+        <div class="text-center font-bold text-4xl mb-10">Crypto Tracker</div>
         <AssetList />
     </div>
 </template>

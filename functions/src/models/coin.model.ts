@@ -1,28 +1,42 @@
 interface IAsset {
-    asset_id: string;
+    id: number;
     name: string;
-    type_is_crypto: boolean;
-    data_quote_start: Date;
-    data_quote_end: Date;
-    data_orderbook_start: Date;
-    data_orderbook_end: Date;
-    data_trade_start: Date;
-    data_trade_end: Date;
-    data_symbols_count: number;
-    data_start: Date;
-    data_end: Date;
-    volume_1hrs_usd: number;
-    volume_1day_usd: number;
-    volume_1mth_usd: number;
-    price_usd: number;
-    id_icon?: string;
+    symbol: string;
+    slug: string;
+    cmc_rank: number;
+    num_market_pairs: number;
+    circulating_supply: number;
+    total_supply: number;
+    max_supply: number;
+    last_updated: string;
+    date_added: string;
+    tags: string[];
+    platform: any;
+    quote: {
+        [key: string]: IQuote;
+    };
     icon?: string;
 }
 
-interface IExchangeRate {
-    time: Date;
-    asset_id_quote: string;
-    rate: number;
+interface IQuote {
+    price: number;
+    volume_24h: number;
+    volume_change_24h: number;
+    percent_change_1h: number;
+    percent_change_24h: number;
+    percent_change_7d: number;
+    market_cap: number;
+    market_cap_dominance: number;
+    fully_diluted_market_cap: number;
+    last_updated: string;
 }
 
-export { IAsset, IExchangeRate };
+interface IStatus {
+    timestamp: string;
+    error_code: number;
+    error_message: string;
+    elapsed: number;
+    credit_count: number;
+}
+
+export { IAsset, IStatus };

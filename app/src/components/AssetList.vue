@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import { IAsset } from "../models/coin.model";
-import Asset from "./Asset.vue";
 import { getAuth } from "firebase/auth";
 import { getHeaders } from "../helpers";
+import { IAsset } from "../models/coin.model";
+import Asset from "./Asset.vue";
 import AlertMessage from "./AlertMessage.vue";
 import LoadingBar from "./LoadingBar.vue";
+import Pagination from "./Pagination.vue";
 
 let assets = ref<IAsset[]>();
 let filtered = ref<IAsset[]>();
@@ -21,7 +22,7 @@ const filterBy = (event: Event) => {
     });
 };
 
-onMounted(() => {
+const getAssets = (start = 0, limit = 50) => {
     getAuth()
         .currentUser?.getIdToken(true)
         .then(async (token) => {
@@ -30,6 +31,7 @@ onMounted(() => {
             try {
                 const { data } = await axios.get<IAsset[]>(`${import.meta.env.VITE_API_URL}/coin/assets`, {
                     headers: getHeaders(token),
+                    params: { start: start * limit + 1, limit },
                 });
                 assets.value = data;
                 filtered.value = data;
@@ -39,6 +41,10 @@ onMounted(() => {
             }
         })
         .catch(console.error);
+};
+
+onMounted(() => {
+    getAssets();
 });
 </script>
 
@@ -46,15 +52,15 @@ onMounted(() => {
     <AlertMessage v-if="error">No assets found!</AlertMessage>
 
     <div v-else>
-        <div class="mb-8">
-            <input
-                v-model="search"
-                @input.prevent="filterBy"
-                type="search"
-                placeholder="Search..."
-                class="form-input w-1/2"
-            />
-        </div>
+        <input
+            v-model="search"
+            @input.prevent="filterBy"
+            type="search"
+            placeholder="Search..."
+            class="form-input w-full md:w-1/2 mb-6"
+        />
+
+        <Pagination @update="getAssets" />
 
         <div v-if="filtered" class="grid md:grid-cols-2 gap-4">
             <Asset v-for="asset in filtered" :key="asset.id" :asset="asset" />
@@ -63,5 +69,3 @@ onMounted(() => {
         <LoadingBar v-else>Loading assets...</LoadingBar>
     </div>
 </template>
-
-<style scoped></style>

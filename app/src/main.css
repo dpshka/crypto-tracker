@@ -1,11 +1,15 @@
 .form-input {
-    @apply rounded-lg border-1 border-gray-400;
+    @apply rounded-lg border-1 border-gray-400 py-2 px-3;
+}
+
+select.form-input {
+    @apply pr-10;
 }
 
 .btn-primary {
     @apply bg-green-400 hover:bg-green-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors;
 }
 
-.btn-primary:disabled {
+button:disabled {
     @apply cursor-not-allowed;
 }

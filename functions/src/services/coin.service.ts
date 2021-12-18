@@ -11,7 +11,11 @@ const headers = {
     "X-CMC_PRO_API_KEY": config.coinApiKey as string,
 };
 
-async function getAssets(bookmarks?: string[]) {
+async function getAssets(start = 1, limit = 100) {
+    // Limit parameters.
+    if (start <= 0) start = 1;
+    if (limit > 100) limit = 100;
+
     // const params = bookmarks ? { filter_asset_id: bookmarks.join(";") } : undefined;
 
     // let assets = await getAll();
@@ -25,6 +29,7 @@ async function getAssets(bookmarks?: string[]) {
             `${config.coinApiUrl}/cryptocurrency/listings/latest`,
             {
                 headers,
+                params: { start, limit },
             },
         );
 

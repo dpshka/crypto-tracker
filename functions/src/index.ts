@@ -8,20 +8,20 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cors from "cors";
 
-// import { initializeApp, credential } from "firebase-admin";
+import { initializeApp, credential } from "firebase-admin";
 import * as functions from "firebase-functions";
 
 // Initialize Firebase.
-// if (config.env === "production") {
-//     // Use the default options as we will run the app on Cloud Functions.
-//     initializeApp();
-// } else if (config.gac) {
-//     initializeApp({
-//         credential: credential.cert(config.gac),
-//     });
-// } else {
-//     throw Error("No Google Application Credentials (GAC) provided. Download the service-account.json file!");
-// }
+if (config.env === "production") {
+    // Use the default options as we will run the app on Cloud Functions.
+    initializeApp();
+} else if (config.gac) {
+    initializeApp({
+        credential: credential.cert(config.gac),
+    });
+} else {
+    throw Error("No Google Application Credentials (GAC) provided. Download the service-account.json file!");
+}
 
 const app = express();
 // Initialize middlewares.

@@ -6,7 +6,6 @@ import { IAsset, IStatus } from "../models/coin.model";
 // const firestore = new FirestoreService<IAsset>("assets");
 const coinApiIconUrl = "https://s2.coinmarketcap.com/static/img/coins/128x128/{id}.png";
 const headers = {
-    // "X-CoinAPI-Key": config.coinApiKey as string,
     Accept: "application/json",
     "Accept-Encoding": "deflate, gzip",
     "X-CMC_PRO_API_KEY": config.coinApiKey as string,
@@ -23,7 +22,7 @@ async function getAssets(bookmarks?: string[]) {
     let assets = new Array<IAsset>();
     try {
         const { data } = await axios.get<{ data: IAsset[]; status: IStatus }>(
-            `${config.apiUrl}/cryptocurrency/listings/latest`,
+            `${config.coinApiUrl}/cryptocurrency/listings/latest`,
             {
                 headers,
             },

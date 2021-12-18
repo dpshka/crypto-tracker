@@ -1,20 +1,25 @@
-import { sign, verify, JwtPayload } from "jsonwebtoken";
-import config from "../config";
+import { auth } from "firebase-admin";
 
-function generateToken(code: string, accessToken: string) {
-    return sign({ code, accessToken }, config.tokenSecret as string, { expiresIn: "1800s" });
+async function verifyToken(token?: string) {
+    if (token) {
+        const decoded = await auth().verifyIdToken(token);
+
+        return decoded.uid;
+    }
+
+    return Promise.reject();
 }
 
-function verifyToken(token?: string) {
-    return new Promise<JwtPayload>((resolve, reject) => {
-        if (!token) {
-            reject();
-        } else {
-            verify(token, config.tokenSecret as string, (err, payload) =>
-                err ? reject() : resolve(payload as JwtPayload),
-            );
-        }
+async function register(email: string, password: string) {
+    const user = await auth().createUser({
+        email,
+        password,
+        displayName: "Crypto User",
+        emailVerified: true,
+        disabled: false,
     });
+
+    return user.uid;
 }
 
-export default { generateToken, verifyToken };
+export default { verifyToken, register };

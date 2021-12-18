@@ -2,6 +2,7 @@ import { defineConfig } from "windicss/helpers";
 import colors from "windicss/colors";
 import typography from "windicss/plugin/typography";
 import forms from "windicss/plugin/forms";
+import icons from "@windicss/plugin-icons";
 
 export default defineConfig({
     extract: {
@@ -9,7 +10,7 @@ export default defineConfig({
     },
     safelist: ["prose", "prose-sm", "m-auto"],
     darkMode: "class",
-    plugins: [typography, forms],
+    plugins: [typography, forms, icons],
     theme: {
         colors: {
             blue: colors.blue,

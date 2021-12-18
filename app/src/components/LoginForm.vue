@@ -1,27 +1,28 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import axios from "axios";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import AlertMessage from "./AlertMessage.vue";
 
-const username = ref("");
+const email = ref("");
 const password = ref("");
+const error = ref(false);
 
 const submitForm = async () => {
     if (!isFormValid()) {
         return;
     }
 
+    error.value = false;
+
     try {
-        await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
-            username: username.value,
-            password: password.value,
-        });
+        await signInWithEmailAndPassword(getAuth(), email.value, password.value);
     } catch (err) {
-        console.error(err);
+        error.value = true;
     }
 };
 
 const isFormValid = () => {
-    return username.value?.length > 3 && password.value;
+    return email.value && password.value;
 };
 </script>
 
@@ -31,8 +32,10 @@ const isFormValid = () => {
             <div class="bg-gray-200 p-4 font-light text-xl">Login to your account</div>
 
             <div class="p-6 md:p-10">
+                <AlertMessage v-show="error">Failed to login :P</AlertMessage>
+
                 <form @submit.prevent="submitForm" class="flex flex-col space-y-4">
-                    <input v-model="username" type="text" class="form-input" placeholder="Username" />
+                    <input v-model="email" type="email" class="form-input" placeholder="Email address" />
 
                     <input v-model="password" type="password" class="form-input" placeholder="Password" />
 

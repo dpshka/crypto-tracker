@@ -1,19 +1,17 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import axios from "axios";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 
 import AssetList from "./components/AssetList.vue";
 import LoginForm from "./components/LoginForm.vue";
 
-const user = ref("");
+const user = ref<User | null>();
+const auth = getAuth();
 
-onMounted(async () => {
-    try {
-        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/auth/user`);
-        user.value = data;
-    } catch (err) {
-        console.error(err);
-    }
+const logout = async (event: Event) => await auth.signOut();
+
+onMounted(() => {
+    onAuthStateChanged(auth, (u) => (user.value = u));
 });
 </script>
 
@@ -21,7 +19,10 @@ onMounted(async () => {
     <div class="max-w-4xl mx-auto px-4 py-8">
         <div class="text-center font-bold text-4xl mb-10">Crypto Tracker</div>
 
-        <AssetList v-if="user" />
+        <div v-if="user">
+            <button @click.prevent="logout" class="btn-primary mb-8">Logout</button>
+            <AssetList />
+        </div>
 
         <LoginForm v-else />
     </div>

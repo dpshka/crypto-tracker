@@ -34,7 +34,7 @@ onMounted(async () => {
             @input.prevent="filterBy"
             type="search"
             placeholder="Search..."
-            class="rounded-lg border-1 border-gray-400 w-1/2"
+            class="form-input w-1/2"
         />
     </div>
 

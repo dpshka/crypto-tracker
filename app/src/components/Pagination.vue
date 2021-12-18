@@ -17,7 +17,7 @@ const update = (start: number) => {
 </script>
 
 <template>
-    <div class="flex mb-4 items-center justify-between space-x-8">
+    <div class="flex items-center justify-between space-x-8">
         <div class="flex space-x-4 justify-center">
             <button v-show="page > 0" @click.prevent="update(page - 1)" class="nav nav-icon">
                 <span class="icon-chevron-left"></span>

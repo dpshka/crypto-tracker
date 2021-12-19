@@ -35,8 +35,8 @@ app.use(
     cors({
         origin: [
             "http://localhost:3000",
-            "https://crypto-tracker-192f2.web.app/",
-            "https://crypto-tracker-192f2.firebaseapp.com/",
+            "https://crypto-tracker-192f2.web.app",
+            "https://crypto-tracker-192f2.firebaseapp.com",
         ],
         methods: ["GET", "POST", "PUT", "DELETE"],
     }),

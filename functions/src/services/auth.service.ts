@@ -7,7 +7,7 @@ async function verifyToken(token?: string) {
         return decoded.uid;
     }
 
-    return Promise.reject();
+    return Promise.reject(new Error("Invalid token"));
 }
 
 async function register(email: string, password: string) {

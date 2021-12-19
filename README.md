@@ -1,3 +1,3 @@
 # Crypto Tracker
 
-A simple web application which tracks the current exchange rates of several crypto currencies from [CoinAPI.io](https://www.coinapi.io/).
+A simple web application which tracks the latest market data of all active cryptocurrencies on [CoinMarketCap](https://coinmarketcap.com/).

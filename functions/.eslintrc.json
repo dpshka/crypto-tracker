@@ -22,9 +22,17 @@
     ],
     "plugins": ["@typescript-eslint", "import"],
     "rules": {
-        "quotes": ["error", "double"],
+        "camelcase": "warn",
         "import/no-unresolved": 0,
-        "max-len": ["warn", 120]
-        // "no-unused-vars": 1
+        "indent": ["error", 4],
+        "max-len": ["warn", 120],
+        "new-cap": "off",
+        "no-unused-vars": "warn",
+        "object-curly-spacing": "off",
+        "quotes": ["error", "double"],
+        "quote-props": "off",
+        "require-jsdoc": "off",
+        "space-before-function-paren": "off",
+        "@typescript-eslint/no-non-null-asserted-optional-chain": "off"
     }
 }

@@ -33,7 +33,11 @@ app.use(cookieParser());
 app.use(bearerToken());
 app.use(
     cors({
-        origin: ["http://localhost:3000", "https://crypto-tracker.web.app", "https://crypto-tracker.firebaseapp.com/"],
+        origin: [
+            "http://localhost:3000",
+            "https://crypto-tracker-192f2.web.app/",
+            "https://crypto-tracker-192f2.firebaseapp.com/",
+        ],
         methods: ["GET", "POST", "PUT", "DELETE"],
     }),
 );

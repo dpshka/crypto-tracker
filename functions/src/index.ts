@@ -37,6 +37,7 @@ app.use(
             "http://localhost:3000",
             "https://crypto-tracker-192f2.web.app",
             "https://crypto-tracker-192f2.firebaseapp.com",
+            "https://cryptrac.h-it.tirol",
         ],
         methods: ["GET", "POST", "PUT", "DELETE"],
     }),
